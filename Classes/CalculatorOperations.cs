@@ -7,14 +7,11 @@ public class CalculatorOperations : ICalculator
     public double Addition(double left, double right)
        => left + right;
 
-
     public double Subtraction(double left, double right)
     => left - right;
 
     public double Multiplication(double left, double right)
     => left * right;
-
-
 
     public double Division(double left, double right)
     {

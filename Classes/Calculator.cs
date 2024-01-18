@@ -10,15 +10,7 @@ public class Calculator
     }
 
     public double Calculate(double left, double right, char operations)
-    {
-        var operationFunc = GetOperationFunction(operations);
-        return Temp(left, right, operationFunc);
-    }
-
-    private double Temp(double left, double right, Func<double, double, double> action)
-    {
-        return action.Invoke(left, right);
-    }
+        => GetOperationFunction(operations).Invoke(left, right);
 
     private Func<double, double, double> GetOperationFunction(char operation)
     {
