@@ -1,2 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using MyCalculator.Classes;
+
+Calculator myCalculator = new Calculator();
+
+Console.WriteLine(myCalculator.Division(4, 0));
