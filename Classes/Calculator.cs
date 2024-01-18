@@ -1,26 +1,42 @@
 ﻿namespace MyCalculator.Classes;
 
-public class Calculator
+public static class Calculator
 {
-    private readonly CalculatorOperations _calculator;
-
-    public Calculator()
+    public static void Action()
     {
-        _calculator = new CalculatorOperations();
-    }
-
-    public double Calculate(double left, double right, char operations)
-        => GetOperationFunction(operations).Invoke(left, right);
-
-    private Func<double, double, double> GetOperationFunction(char operation)
-    {
-        return operation switch
+        CalculatorInfo calculator = new CalculatorInfo();
+        try
         {
-            '+' => _calculator.Addition,
-            '-' => _calculator.Subtraction,
-            '*' => _calculator.Multiplication,
-            '/' => _calculator.Division,
-            _ => throw new ArgumentException("Invalid operation!", nameof(operation)),
-        };
+            Console.WriteLine("Welcome to my Calculator version 1.0");
+
+            Console.WriteLine("====================================\n");
+
+            Console.Write("First number: ");
+            if (!double.TryParse(Console.ReadLine(), out double left))
+            {
+                Console.WriteLine("You must enter a number!");
+                return;
+            }
+
+            Console.Write("Operations: ");
+            if (!char.TryParse(Console.ReadLine(), out char operations) || char.IsDigit(operations))
+            {
+                Console.WriteLine("You must enter a character!");
+                return;
+            }
+
+            Console.Write("Second number: ");
+            if (!double.TryParse(Console.ReadLine(), out double right))
+            {
+                Console.WriteLine("You must enter a number!");
+                return;
+            }
+
+            Console.WriteLine($"Result: {calculator.Calculate(left, right, operations)}");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

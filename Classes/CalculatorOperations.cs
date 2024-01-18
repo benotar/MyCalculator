@@ -17,7 +17,7 @@ public class CalculatorOperations : ICalculator
     {
         if(right.Equals(0))
         {
-            throw new ArgumentException("You cannot divide by zero", nameof(right));
+            throw new ArgumentException("You cannot divide by zero");
         }
 
         return left / right;
