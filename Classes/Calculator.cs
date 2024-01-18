@@ -1,29 +1,34 @@
-﻿using MyCalculator.Interfaces;
+﻿namespace MyCalculator.Classes;
 
-namespace MyCalculator.Classes;
-
-public class Calculator : ICalculator
+public class Calculator
 {
-    public double Addition(double left, double right)
-       => left + right;
+    private readonly CalculatorOperations _calculator;
 
-
-    public double Subtraction(double left, double right)
-    => left - right;
-
-    public double Multiplication(double left, double right)
-    => left * right;
-
-
-
-    public double Division(double left, double right)
+    public Calculator()
     {
-        if(right is 0)
-        {
-            throw new ArgumentException("You cannot divide by zero", nameof(right));
-        }
-
-        return left / right;
+        _calculator = new CalculatorOperations();
     }
 
+    public double Calculate(double left, double right, char operations)
+    {
+        var operationFunc = GetOperationFunction(operations);
+        return Temp(left, right, operationFunc);
+    }
+
+    private double Temp(double left, double right, Func<double, double, double> action)
+    {
+        return action.Invoke(left, right);
+    }
+
+    private Func<double, double, double> GetOperationFunction(char operation)
+    {
+        return operation switch
+        {
+            '+' => _calculator.Addition,
+            '-' => _calculator.Subtraction,
+            '*' => _calculator.Multiplication,
+            '/' => _calculator.Division,
+            _ => throw new ArgumentException("Invalid operation!", nameof(operation)),
+        };
+    }
 }

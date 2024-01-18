@@ -2,4 +2,4 @@
 
 Calculator myCalculator = new Calculator();
 
-Console.WriteLine(myCalculator.Division(4, 0));
+Console.WriteLine(myCalculator.Calculate(5,1022,'/'));
